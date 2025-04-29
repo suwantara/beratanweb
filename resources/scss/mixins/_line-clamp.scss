@@ -1,0 +1,17 @@
+// resources/scss/mixins/_line-clamp.scss
+
+@mixin line-clamp($lines) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $lines;
+    line-clamp: $lines;
+    overflow: hidden;
+}
+
+// // Cara pakai .title {
+//   @include line-clamp(2);
+// }
+
+// .description {
+//   @include line-clamp(4);
+// }

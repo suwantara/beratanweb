@@ -1,0 +1,13 @@
+// Import override variables dulu
+@import './components/variables';
+@import './mixins/line-clamp';
+@import './components/utilities';
+@import './components/spinner';
+@import './components/buttons';
+@import './components/navbar';
+
+@import './style';
+
+// Lalu import Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
