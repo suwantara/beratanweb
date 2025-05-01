@@ -13,7 +13,7 @@
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
-                        {{ __('Dashboard') }}
+                        Dashboard
                     </a>
                 </li>
 
@@ -22,10 +22,10 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Manage</a>
                     <div class="dropdown-menu bg-light m-0">
-                        <a class="dropdown-item" href="{{ route('product') }}">{{ __('Manage Products') }}</a>
-                        <a class="dropdown-item" href="{{ route('gallery') }}">{{ __('Manage Gallery') }}</a>
-                        <a class="dropdown-item" href="{{ route('artikel') }}">{{ __('Manage Articles') }}</a>
-                        <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Manage Profile') }}</a>
+                        <a class="dropdown-item" href="{{ route('product') }}">Produk</a>
+                        <a class="dropdown-item" href="{{ route('gallery') }}">Galeri</a>
+                        <a class="dropdown-item" href="{{ route('artikel') }}">Artikel</a>
+                        <a class="dropdown-item" href="{{ route('profile.edit') }}">profile</a>
                     </div>
                 </div>
                 @endauth
@@ -41,14 +41,14 @@
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li>
                                 <a class="dropdown-item" href="{{ route('profile.edit') }}">
-                                    {{ __('Profile') }}
+                                    Profile
                                 </a>
                             </li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit" class="dropdown-item">
-                                        {{ __('Log Out') }}
+                                        Log Out
                                     </button>
                                 </form>
                             </li>
@@ -60,10 +60,10 @@
             @guest
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link" href="{{ route('login') }}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        <a class="nav-link" href="{{ route('register') }}">Register</a>
                     </li>
                 </ul>
             @endguest

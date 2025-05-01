@@ -10,15 +10,15 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
-Route::get('/', [PageController::class, 'home'])->name('home');
-Route::get('/Tentang', [PageController::class, 'about'])->name('about');
-Route::get('/Layanan', [PageController::class, 'service'])->name('service');
-Route::get('/Kontak', [PageController::class, 'contact'])->name('contact');
+Route::view('/', [PageController::class, 'home'])->name('home');
+Route::view('/tentang', [PageController::class, 'about'])->name('about');
+Route::view('/layanan', [PageController::class, 'service'])->name('service');
+Route::get('/kontak', [PageController::class, 'contact'])->name('contact');
 Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
 
-Route::get('/Produk', [ProductController::class, 'index'])->name('product');
-Route::get('/Galeri', [GalleryController::class, 'index'])->name('gallery');
-Route::get('/Artikel', [BlogController::class, 'index'])->name('artikel');
+Route::get('/produk', [ProductController::class, 'index'])->name('product');
+Route::get('/galeri', [GalleryController::class, 'index'])->name('gallery');
+Route::get('/artikel', [BlogController::class, 'index'])->name('artikel');
 
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 
