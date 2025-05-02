@@ -5,7 +5,7 @@
 <x-section.header
     header="Tentang Kami"
     :breadcrumbs="[
-        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'Beranda', 'url' => route('home')],
         ['label' => 'Tentang Kami', 'url' => '']
     ]"
 />

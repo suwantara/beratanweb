@@ -9,16 +9,35 @@ use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\View\Components\Section\Gallery;
 
-Route::view('/', [PageController::class, 'home'])->name('home');
-Route::view('/tentang', [PageController::class, 'about'])->name('about');
-Route::view('/layanan', [PageController::class, 'service'])->name('service');
-Route::get('/kontak', [PageController::class, 'contact'])->name('contact');
-Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
+Route::controller(PageController::class)
+    ->group(function () {
+        Route::view('/', 'home')->name('home');
+        Route::view('/tentang', 'about')->name('about');
+        Route::view('/layanan', 'service')->name('service');
+        Route::get('/kontak', 'contact')->name('contact');
+        Route::get('/dashboard', 'dashboard')->name('dashboard');
+    });
+// Route::view('/', [PageController::class, 'home'])->name('home');
+// Route::view('/tentang', [PageController::class, 'about'])->name('about');
+Route::controller(ProductController::class)
+    ->group(function () {
+        Route::get('/produk', 'index')->name('product');
 
-Route::get('/produk', [ProductController::class, 'index'])->name('product');
-Route::get('/galeri', [GalleryController::class, 'index'])->name('gallery');
-Route::get('/artikel', [BlogController::class, 'index'])->name('artikel');
+    });
+Route::controller(GalleryController::class)
+    ->group(function () {
+        Route::get('/galeri', 'index')->name('gallery');
+
+    });
+Route::controller(BlogController::class)
+    ->group(function () {
+        Route::get('/artikel', 'index')->name('artikel');
+    });
+// Route::get('/produk', [ProductController::class, 'index'])->name('product');
+// Route::get('/galeri', [GalleryController::class, 'index'])->name('gallery');
+// Route::get('/artikel', [BlogController::class, 'index'])->name('artikel');
 
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 
