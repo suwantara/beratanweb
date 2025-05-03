@@ -1,38 +1,50 @@
-@extends('layouts.dashboard')
+<x-guest-layout>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card shadow-sm border-0" style="max-width: 400px; width: 100%;">
+            <div class="card-body p-4">
+                <h4 class="card-title text-center mb-4">Masuk</h4>
 
-@section('content')
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white text-center">
-                    <h4>{{ __('Login') }}</h4>
-                </div>
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="email" class="form-label">{{ __('Email Address') }}</label>
-                            <input type="email" name="email" id="email" class="form-control" required autofocus>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">{{ __('Password') }}</label>
-                            <input type="password" name="password" id="password" class="form-control" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" name="remember" id="remember" class="form-check-input">
-                            <label class="form-check-label" for="remember">{{ __('Remember Me') }}</label>
-                        </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">{{ __('Login') }}</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="card-footer text-center">
-                    <a href="{{ route('register') }}">{{ __('Don\'t have an account? Register') }}</a>
-                </div>
+                <!-- Session Status -->
+                <x-auth-session-status class="alert alert-success mb-4" :status="session('status')" />
+
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+
+                    <!-- Email Address -->
+                    <div class="mb-3">
+                        <x-input-label for="email" :value="__('Email')" class="form-label" />
+                        <x-text-input id="email" class="form-control" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                        <x-input-error :messages="$errors->get('email')" class="text-danger small mt-1" />
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <x-input-label for="password" :value="__('Password')" class="form-label" />
+                        <x-text-input id="password" class="form-control" type="password" name="password" required autocomplete="current-password" />
+                        <x-input-error :messages="$errors->get('password')" class="text-danger small mt-1" />
+                    </div>
+
+                    <!-- Remember Me -->
+                    <div class="mb-3 form-check">
+                        <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
+                        <label for="remember_me" class="form-check-label">
+                            Ingatkan saya
+                        </label>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        @if (Route::has('password.request'))
+                            <a class="text-decoration-none small text-muted" href="{{ route('password.request') }}">
+                                Reset Password
+                            </a>
+                        @endif
+
+                        <x-primary-button class="btn btn-primary">
+                            Masuk
+                        </x-primary-button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
-@endsection
+</x-guest-layout>

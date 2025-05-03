@@ -29,4 +29,8 @@ class PageController extends Controller
     {
         return view('dashboard');
     }
+    public function detail()
+    {
+        return view('detail');
+    }
 }

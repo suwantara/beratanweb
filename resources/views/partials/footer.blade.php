@@ -16,9 +16,9 @@
             </div>
             <div class="col-lg-3 col-md-6">
                 <h5 class="text-white mb-4">Tautan Cepat</h5>
-                <a class="btn btn-link" href="/about.html">Tentang Kami</a>
-                <a class="btn btn-link" href="/contact.html">Hubungi Kami</a>
-                <a class="btn btn-link" href="/service.html">Layanan Kami</a>
+                <a class="btn btn-link" href="{{ route('about') }}">Tentang Kami</a>
+                <a class="btn btn-link" href="{{ route('contact') }}">Hubungi Kami</a>
+                <a class="btn btn-link" href="{{ route('service') }}">Layanan Kami</a>
                 <a class="btn btn-link" href="">Syarat dan Ketentuan</a>
                 <a class="btn btn-link" href="">Dukungan Pelanggan</a>
             </div>

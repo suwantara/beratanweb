@@ -4,16 +4,6 @@
             Dashboard
         </h2>
     </x-slot>
-
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Kamu Sudah Login</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{-- <x-dashboard.message :messages="$messages"/> --}}
+    {{-- Tambahkan konten dashboard di sini --}}
 </x-app-layout>

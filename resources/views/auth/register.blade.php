@@ -1,42 +1,51 @@
-@extends('layouts.dashboard')
+<x-guest-layout>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card shadow-sm border-0" style="max-width: 400px; width: 100%;">
+            <div class="card-body p-4">
+                <h4 class="card-title text-center mb-4">Daftar</h4>
 
-@section('content')
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-sm">
-                <div class="card-header bg-success text-white text-center">
-                    <h4>{{ __('Register') }}</h4>
-                </div>
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="name" class="form-label">{{ __('Name') }}</label>
-                            <input type="text" name="name" id="name" class="form-control" required autofocus>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">{{ __('Email Address') }}</label>
-                            <input type="email" name="email" id="email" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">{{ __('Password') }}</label>
-                            <input type="password" name="password" id="password" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password_confirmation" class="form-label">{{ __('Confirm Password') }}</label>
-                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
-                        </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-success">{{ __('Register') }}</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="card-footer text-center">
-                    <a href="{{ route('login') }}">{{ __('Already have an account? Login') }}</a>
-                </div>
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+
+                    <!-- Name -->
+                    <div class="mb-3">
+                        <x-input-label for="name" :value="__('Name')" class="form-label" />
+                        <x-text-input id="name" class="form-control" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                        <x-input-error :messages="$errors->get('name')" class="text-danger small mt-1" />
+                    </div>
+
+                    <!-- Email Address -->
+                    <div class="mb-3">
+                        <x-input-label for="email" :value="__('Email')" class="form-label" />
+                        <x-text-input id="email" class="form-control" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                        <x-input-error :messages="$errors->get('email')" class="text-danger small mt-1" />
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <x-input-label for="password" :value="__('Password')" class="form-label" />
+                        <x-text-input id="password" class="form-control" type="password" name="password" required autocomplete="new-password" />
+                        <x-input-error :messages="$errors->get('password')" class="text-danger small mt-1" />
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="mb-3">
+                        <x-input-label for="password_confirmation" :value="__('Confirm Password')" class="form-label" />
+                        <x-text-input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required autocomplete="new-password" />
+                        <x-input-error :messages="$errors->get('password_confirmation')" class="text-danger small mt-1" />
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a class="text-decoration-none small text-muted" href="{{ route('login') }}">
+                            Sudah punya akun? Masuk
+                        </a>
+
+                        <x-primary-button class="btn btn-primary">
+                            Daftar
+                        </x-primary-button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
-@endsection
+</x-guest-layout>
