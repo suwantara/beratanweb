@@ -26,13 +26,13 @@ Route::controller(PageController::class)
 Route::controller(ProductController::class)
     ->group(function () {
         Route::get('/produk', 'index')->name('product');
-
     });
+
 Route::controller(GalleryController::class)
     ->group(function () {
         Route::get('/galeri', 'index')->name('gallery');
-
     });
+
 Route::controller(BlogController::class)
     ->group(function () {
         Route::get('/artikel', 'index')->name('artikel');
@@ -66,6 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/messages/{message}/mark-as-read', [ContactController::class, 'markAsRead'])->name('messages.markAsRead');
 });
 
 require __DIR__.'/auth.php';
