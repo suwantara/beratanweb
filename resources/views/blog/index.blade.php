@@ -10,5 +10,5 @@
     ]"
 />
 
-
+<x-section.blog></x-section.blog>
 @endsection

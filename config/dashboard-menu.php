@@ -19,6 +19,11 @@ return [
                 }
             ]
         ],
+        [
+            'title' => 'Manage Posts',
+            'route' => 'admin.posts.index',
+            'icon' => 'bi bi-file-text',
+        ],
         // Add more menu items here as needed
     ]
 ];

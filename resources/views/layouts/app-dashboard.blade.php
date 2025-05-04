@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ asset('lib/animate/animate.min.css') }}">
     <link rel="stylesheet" href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('lib/lightbox/css/lightbox.min.css') }}">
-    @stack('styles') <!-- For adding custom styles in child views -->
+
     </head>
     <body>
         <div class="d-flex flex-column min-vh-100">
@@ -54,6 +54,6 @@
     <script src="{{ asset('lib/parallax/parallax.min.js') }}"></script>
     <script src="{{ asset('lib/lightbox/js/lightbox.min.js') }}"></script>
     <!-- JavaScript Libraries -->
-    @stack('scripts') <!-- For adding custom scripts in child views -->
+    @stack('scripts')
     </body>
 </html>

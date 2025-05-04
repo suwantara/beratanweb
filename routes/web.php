@@ -11,6 +11,10 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\View\Components\Section\Gallery;
+use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\CategoryController;
 
 Route::controller(PageController::class)
     ->group(function () {
@@ -63,6 +67,27 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/messages/{message}/mark-as-read', [ContactController::class, 'markAsRead'])->name('messages.markAsRead');
     });
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('admin/posts', AdminPostController::class);
+    Route::resource('admin/categories', AdminCategoryController::class);
+});
+
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('posts', AdminPostController::class);
+    Route::resource('categories', AdminCategoryController::class);
+});
+
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('posts', PostController::class);
+});
+
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('categories', CategoryController::class);
+});
+
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('blog.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
