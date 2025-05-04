@@ -14,11 +14,23 @@
         <!-- Navigation Links -->
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
-                        Dashboard
-                    </a>
-                </li>
+                @foreach(config('dashboard-menu.menu') as $menuItem)
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs($menuItem['route']) ? 'active' : '' }}"
+                           href="{{ route($menuItem['route']) }}">
+                            <i class="{{ $menuItem['icon'] }}"></i>
+                            {{ $menuItem['title'] }}
+                            @if(isset($menuItem['badge']) && isset($menuItem['badge']['count']))
+                                @php
+                                    $count = is_callable($menuItem['badge']['count']) ? $menuItem['badge']['count']() : $menuItem['badge']['count'];
+                                @endphp
+                                @if($count > 0)
+                                    <span class="badge bg-danger">{{ $count }}</span>
+                                @endif
+                            @endif
+                        </a>
+                    </li>
+                @endforeach
             </ul>
 
             <!-- Settings Dropdown -->

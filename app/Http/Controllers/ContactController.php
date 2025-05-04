@@ -10,8 +10,7 @@ class ContactController extends Controller
     public function index()
     {
         $messages = Message::latest()->paginate(9);
-        // Ubah ini untuk mengirim ke view dashboard
-        return view('dashboard', compact('messages'));
+        return view('dashboard.messages', compact('messages'));
     }
 
     public function store(Request $request)

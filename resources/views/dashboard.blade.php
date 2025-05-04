@@ -5,7 +5,29 @@
         </h2>
     </x-slot>
 
-    @if(isset($messages))
-        <x-dashboard.message :messages="$messages" />
-    @endif
+    <div class="container py-4">
+        {{-- Widget Total Pesan --}}
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Pesan</h5>
+                        <p class="card-text h2">{{ \App\Models\Message::count() }}</p>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Widget Pesan Baru --}}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Pesan Baru</h5>
+                        <p class="card-text h2">{{ \App\Models\Message::whereNull('read_at')->count() }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add more dashboard widgets here -->
+        </div>
+    </div>
 </x-app-layout>

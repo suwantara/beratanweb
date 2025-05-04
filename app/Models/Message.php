@@ -17,4 +17,9 @@ class Message extends Model
     protected $dates = [
         'read_at'
     ];
+
+    public function scopeUnread($query)
+    {
+        return $query->whereNull('read_at');
+    }
 }

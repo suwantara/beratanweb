@@ -53,13 +53,15 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 // Route::post('/register', [RegisterController::class, 'register']);
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [ContactController::class, 'index'])->name('dashboard');
-    // ... route lainnya
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::prefix('dashboard')->name('dashboard.')->group(function () {
+        Route::get('/messages', [ContactController::class, 'index'])->name('messages');
+        Route::patch('/messages/{message}/mark-as-read', [ContactController::class, 'markAsRead'])->name('messages.markAsRead');
+    });
 });
 
 Route::middleware('auth')->group(function () {
