@@ -2,24 +2,18 @@
 
 namespace App\View\Components\Dashboard;
 
-use Closure;
-use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class message extends Component
+class Message extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
+    public $messages;
+
+    public function __construct($messages)
     {
-        //
+        $this->messages = $messages;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
-    public function render(): View|Closure|string
+    public function render()
     {
         return view('components.dashboard.message');
     }

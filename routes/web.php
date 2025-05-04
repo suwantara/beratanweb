@@ -37,6 +37,7 @@ Route::controller(BlogController::class)
     ->group(function () {
         Route::get('/artikel', 'index')->name('artikel');
     });
+
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 // Route::get('/produk', [ProductController::class, 'index'])->name('product');
 // Route::get('/galeri', [GalleryController::class, 'index'])->name('gallery');
@@ -56,7 +57,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard/messages', [ContactController::class, 'index'])->name('dashboard.messages');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [ContactController::class, 'index'])->name('dashboard');
+    // ... route lainnya
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

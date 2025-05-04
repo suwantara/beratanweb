@@ -16,7 +16,7 @@
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Halaman</a>
                 <div class="dropdown-menu bg-light m-0">
                     <a href="{{ route('gallery') }}" class="dropdown-item {{ request()->routeIs('gallery') ? 'active' : '' }}">Galeri</a>
-                    <a href="{{ route('artikel') }}" class="dropdown-item peer {{ request()->routeIs('blog') ? 'active' : '' }}:">Artikel</a>
+                    <a href="{{ route('artikel') }}" class="dropdown-item {{ request()->routeIs('blog') ? 'active' : '' }}:">Artikel</a>
                 </div>
             </div>
             <a href="{{ route('contact') }}" class="nav-item nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">Kontak</a>

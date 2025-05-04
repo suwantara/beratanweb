@@ -1,9 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="h4 mb-0 text-gray-800">
             Dashboard
         </h2>
     </x-slot>
-    {{-- <x-dashboard.message :messages="$messages"/> --}}
-    {{-- Tambahkan konten dashboard di sini --}}
+
+    @if(isset($messages))
+        <x-dashboard.message :messages="$messages" />
+    @endif
 </x-app-layout>

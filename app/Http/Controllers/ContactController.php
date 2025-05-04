@@ -10,7 +10,8 @@ class ContactController extends Controller
     public function index()
     {
         $messages = Message::latest()->paginate(10);
-        return view('components.dashboard.message', compact('messages'));
+        // Ubah ini untuk mengirim ke view dashboard
+        return view('dashboard', compact('messages'));
     }
 
     public function store(Request $request)
@@ -26,4 +27,5 @@ class ContactController extends Controller
 
         return redirect()->back()->with('success', 'Pesan Anda telah berhasil dikirim.');
     }
+
 }
