@@ -17,16 +17,13 @@
                 @foreach(config('dashboard-menu.menu') as $menuItem)
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs($menuItem['route']) ? 'active' : '' }}"
-                           href="{{ route($menuItem['route']) }}">
+                            href="{{ isset($menuItem['route']) && Route::has($menuItem['route']) ? route($menuItem['route']) : '#' }}">
                             <i class="{{ $menuItem['icon'] }}"></i>
                             {{ $menuItem['title'] }}
-                            @if(isset($menuItem['badge']) && isset($menuItem['badge']['count']))
-                                @php
-                                    $count = is_callable($menuItem['badge']['count']) ? $menuItem['badge']['count']() : $menuItem['badge']['count'];
-                                @endphp
-                                @if($count > 0)
-                                    <span class="badge bg-danger">{{ $count }}</span>
-                                @endif
+                            @if(!empty($menuItem['badge']['count']))
+                                <span class="badge bg-danger">
+                                    {{ is_callable($menuItem['badge']['count']) ? $menuItem['badge']['count']() : $menuItem['badge']['count'] }}
+                                </span>
                             @endif
                         </a>
                     </li>

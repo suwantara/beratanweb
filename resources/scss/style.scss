@@ -383,6 +383,12 @@ $gray: #B0B9AE;
     transform: translateY(0);
 }
 
+.blog-card img {
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+}
+
 /* Loading State */
 #blogContainer.loading-state {
     position: relative;
@@ -412,3 +418,26 @@ $gray: #B0B9AE;
 .blog-loading-spinner.show {
     display: block;
 }
+
+.card-img-top {
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+}
+
+.modal-body img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.img-square {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    max-width: 500px;
+    max-height: 500px;
+    display: block;
+    margin: 0 auto;
+}
+

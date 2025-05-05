@@ -9,7 +9,7 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $messages = Message::latest()->paginate(9);
+        $messages = Message::latest()->paginate(10); // Fetch messages with pagination
         return view('dashboard.messages', compact('messages'));
     }
 
@@ -34,5 +34,11 @@ class ContactController extends Controller
         ]);
 
         return back()->with('success', 'Pesan ditandai sebagai sudah dibaca');
+    }
+
+    public function dashboard()
+    {
+        $messages = \App\Models\Message::latest()->get();
+        return view('dashboard', compact('messages'));
     }
 }

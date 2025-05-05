@@ -24,6 +24,11 @@ return [
             'route' => 'admin.posts.index',
             'icon' => 'bi bi-file-text',
         ],
+        [
+            'title' => 'Categories',
+            'route' => 'admin.categories.index', // Pastikan route ini sudah ada
+            'icon' => 'bi bi-tags',
+        ],
         // Add more menu items here as needed
     ]
 ];

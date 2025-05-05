@@ -98,7 +98,9 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('categories', CategoryController::class);
+});
 
 // Route::get('/', function () {
 //     return view('home');

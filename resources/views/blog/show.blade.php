@@ -13,19 +13,19 @@
 
 <div class="container py-5">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-10">
             <div class="card">
-                <img src="{{ Storage::url($post->image) }}" class="card-img-top" alt="{{ $post->title }}">
+                <img src="{{ Storage::url($post->image) }}" class="img-fluid" alt="{{ $post->title }}">
                 <div class="card-body">
                     <h1 class="card-title">{{ $post->title }}</h1>
                     <p class="text-muted">
-                        <small>By {{ $post->author->name }} | {{ $post->created_at->format('d M Y') }}</small>
+                        <small>Diunggah oleh {{ $post->author->name }} | {{ $post->created_at->format('d M Y') }}</small>
                     </p>
-                    <p class="card-text">{{ $post->content }}</p>
+                    <div class="card-text text-justify">{!! $post->content !!}</div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-2">
             <!-- Sidebar: Categories -->
             <div class="mb-4">
                 <h4>Kategori</h4>
