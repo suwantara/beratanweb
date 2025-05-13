@@ -29,6 +29,11 @@ return [
             'route' => 'admin.categories.index', // Pastikan route ini sudah ada
             'icon' => 'bi bi-tags',
         ],
+                [
+            'title' => 'Manage Products', // Tambahkan menu baru
+            'route' => 'admin.products.index', // Pastikan route ini sesuai dengan route CRUD produk
+            'icon' => 'bi bi-box', // Gunakan ikon yang sesuai
+        ],
         // Add more menu items here as needed
     ]
 ];

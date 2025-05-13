@@ -9,6 +9,7 @@
         ['label' => 'Produk Kami', 'url' => '']
     ]"
 />
-<x-section.product></x-section.product>
+
+<x-section.product :products="$products" />
 
 @endsection

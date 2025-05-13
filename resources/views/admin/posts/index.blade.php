@@ -3,7 +3,7 @@
     <x-slot name="header">
         <div class="d-flex justify-content-between align-items-center">
             <h2 class="h4 mb-0 text-gray-800">Manage Posts</h2>
-            <a href="{{ route('admin.posts.create') }}" class="btn btn-primary">
+            <a href="{{ route('admin.posts.create') }}" class="btn btn-primary text-white">
                 <i class="bi bi-plus-lg"></i> Add New Post
             </a>
         </div>
@@ -45,7 +45,7 @@
                                     <td>
                                         <div class="btn-group">
                                             <a href="{{ route('admin.posts.edit', $post) }}"
-                                               class="btn btn-sm btn-info">
+                                               class="btn btn-sm btn-secondary">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
                                             <form action="{{ route('admin.posts.destroy', $post) }}"
@@ -53,7 +53,7 @@
                                                   onsubmit="return confirm('Are you sure?')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                <button type="submit" class="btn btn-sm btn-danger mx-2">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                             </form>

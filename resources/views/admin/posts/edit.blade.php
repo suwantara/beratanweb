@@ -1,3 +1,4 @@
+{{-- File: resources/views/admin/posts/edit.blade.php --}}
 <x-app-layout>
     <x-slot name="header">
         <h2 class="h4 mb-0 text-gray-800">Edit Post</h2>
@@ -10,73 +11,45 @@
                     @csrf
                     @method('PUT')
 
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Title</label>
-                        <input type="text"
-                               class="form-control @error('title') is-invalid @enderror"
-                               id="title"
-                               name="title"
-                               value="{{ old('title', $post->title) }}"
-                               required>
-                        @error('title')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+                    <x-form.input
+                        name="title"
+                        label="Title"
+                        :value="old('title', $post->title)"
+                        required
+                    />
 
-                    <div class="mb-3">
-                        <label for="category_id" class="form-label">Category</label>
-                        <select class="form-select @error('category_id') is-invalid @enderror"
-                                id="category_id"
-                                name="category_id"
-                                required>
-                            <option value="">Select Category</option>
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}"
-                                    {{ old('category_id', $post->category_id) == $category->id ? 'selected' : '' }}>
-                                    {{ $category->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('category_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+                    <x-form.select
+                        name="category_id"
+                        label="Category"
+                        :options="$categories"
+                        :selected="old('category_id', $post->category_id)"
+                        required
+                    />
 
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Image</label>
-                        <input type="file"
-                               class="form-control @error('image') is-invalid @enderror"
-                               id="image"
-                               name="image"
-                               accept="image/*">
-                        @error('image')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+                    <x-form.input
+                        name="image"
+                        label="Image"
+                        type="file"
+                        accept="image/*"
+                    />
 
-                    <div class="mb-3">
-                        <label for="excerpt" class="form-label">Excerpt</label>
-                        <textarea class="form-control @error('excerpt') is-invalid @enderror"
-                                  id="excerpt"
-                                  name="excerpt"
-                                  rows="3"
-                                  required>{{ old('excerpt', $post->excerpt) }}</textarea>
-                        @error('excerpt')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+                    <x-form.textarea
+                        name="excerpt"
+                        label="Excerpt"
+                        rows="3"
+                        :value="old('excerpt', $post->excerpt)"
+                        required
+                    />
 
-                    <div class="mb-3">
-                        <label for="content" class="form-label">Content</label>
-                        <textarea class="form-control @error('content') is-invalid @enderror"
-                                  id="content"
-                                  name="content"
-                                  rows="10"
-                                  required>{{ old('content', $post->content) }}</textarea>
-                        @error('content')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+                    {{-- CKEditor Textarea --}}
+                    <x-form.textarea
+                        name="content"
+                        label="Content"
+                        rows="10"
+                        :value="old('content', $post->content)"
+                        required
+                        id="content"
+                    />
 
                     <div class="d-flex justify-content-end gap-2">
                         <a href="{{ route('admin.posts.index') }}" class="btn btn-secondary">Cancel</a>
@@ -86,4 +59,17 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            ClassicEditor
+                .create(document.querySelector('#content'))
+                .catch(error => {
+                    console.error('CKEditor init error:', error);
+                });
+        });
+    </script>
+    @endpush
 </x-app-layout>

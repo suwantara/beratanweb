@@ -8,8 +8,10 @@ class PageController extends Controller
 {
     public function home()
     {
-        return view('home');
+        $products = \App\Models\Product::all();
+        return view('home', compact('products'));
     }
+
 
     public function about()
     {
