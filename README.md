@@ -117,3 +117,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 If you have any questions, feel free to reach out:
 - Email: your.email@example.com
 - Website: [www.yourwebsite.com](http://www.yourwebsite.com)
+
+## Tambahan
+- Project ini akan diupdate setiap saat jika ada fitur baru
