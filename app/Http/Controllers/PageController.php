@@ -8,7 +8,7 @@ class PageController extends Controller
 {
     public function home()
     {
-        $products = \App\Models\Product::all();
+        $products = \App\Models\Product::take(6)->get();
         return view('home', compact('products'));
     }
 
