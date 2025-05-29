@@ -3,7 +3,7 @@
 
 ## About Dairy Web
 
-Dairy Web is a web application built with Laravel that helps manage dairy-related business operations. Our platform provides essential features including:
+Dairy Web merupakan website profile untuk peternakan susu sapi:
 
 - User Authentication & Authorization
 - Contact Form Management
@@ -117,3 +117,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 If you have any questions, feel free to reach out:
 - Email: your.email@example.com
 - Website: [www.yourwebsite.com](http://www.yourwebsite.com)
+
+## Tambahan
+- Project ini akan diupdate setiap saat jika ada fitur baru
