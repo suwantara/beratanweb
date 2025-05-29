@@ -1,3 +1,7 @@
+@php
+    use Illuminate\Support\Str;
+@endphp
+
 <!-- Team Start -->
 <div class="py-5">
     <div class="container-fluid py-5 px-md-5 px-3">
@@ -17,7 +21,7 @@
                                     class="form-control border-primary"
                                     placeholder="Cari artikel..."
                                     value="{{ request('search') }}">
-                            <button class="btn btn-primary" type="submit">Cari</button>
+                            <button class="btn btn-primary text-white" type="submit">Cari</button>
                         </div>
                     </form>
                 </div>
@@ -41,13 +45,15 @@
 
                 <!-- Recent Posts Start -->
                 <div class="mt-5 shadow-sm pt-4 pb-5 px-auto rounded-2 border">
-                    <h4 class="mb-4">Artikel Terbaru</h4>
-                    <div class="list-group">
+                    <h4 class="mb-4 px-4">Artikel Terbaru</h4>
+                    <div class="list-group px-4">
                         @foreach($recentPosts as $post)
                             <a href="{{ route('blog.show', $post->slug) }}"
                                 class="list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h6 class="mb-1">{{ $post->title }}</h6>
+                                    <h6 class="mb-1 text-truncate-1" title="{{ $post->title }}">
+                                        {{ Str::limit($post->title, 20) }}
+                                    </h6>
                                     <small>{{ $post->created_at->diffForHumans() }}</small>
                                 </div>
                                 <small class="text-muted">{{ $post->category->name }}</small>
@@ -66,8 +72,12 @@
                             <div class="card h-100 border-primary">
                                 <img src="{{ Storage::url($post->image) }}" class="card-img-top img-square" alt="{{ $post->title }}">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ $post->title }}</h5>
-                                    <p class="card-text text-truncate-3">{{ $post->excerpt }}</p>
+                                    <h5 class="card-title text-truncate-1" title="{{ $post->title }}">
+                                        {{ Str::limit($post->title, 60) }}
+                                    </h5>
+                                    <p class="card-text text-truncate-3" title="{{ $post->excerpt }}">
+                                        {{ Str::limit($post->excerpt, 200) }}
+                                    </p>
                                     <a href="{{ route('blog.show', $post->slug) }}" class="stretched-link"></a>
                                 </div>
                                 <div class="card-footer border-top border-primary bg-primary">
@@ -97,3 +107,5 @@
         </div>
     </div>
 </div>
+
+

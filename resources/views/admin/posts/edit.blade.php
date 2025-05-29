@@ -60,15 +60,27 @@
         </div>
     </div>
 
+    @push('styles')
+        {{-- Vite directive untuk CSS (pastikan sudah import summernote di app.js) --}}
+        @vite(['resources/js/app.js'])
+    @endpush
+
     @push('scripts')
-    <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            ClassicEditor
-                .create(document.querySelector('#content'))
-                .catch(error => {
-                    console.error('CKEditor init error:', error);
-                });
+            $('#content').summernote({
+                height: 300,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
         });
     </script>
     @endpush

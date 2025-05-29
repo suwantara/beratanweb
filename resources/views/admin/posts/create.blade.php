@@ -23,7 +23,12 @@
                     <x-form.select name="category_id" label="Category" :options="$categories" required />
                     <x-form.input name="image" label="Image" type="file" required accept="image/*" />
                     <x-form.textarea name="excerpt" label="Excerpt" rows="3" required />
-                    <x-form.textarea name="content" label="Content" rows="10" required />
+
+                    {{-- Ganti komponen textarea content agar ada id="content" --}}
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Content</label>
+                        <textarea id="content" name="content" class="form-control" rows="10" required>{{ old('content') }}</textarea>
+                    </div>
 
                     <div class="d-flex justify-content-end gap-2">
                         <a href="{{ route('admin.posts.index') }}" class="btn btn-secondary">Cancel</a>
@@ -34,15 +39,27 @@
         </div>
     </div>
 
+    @push('styles')
+        {{-- Vite directive untuk CSS (pastikan sudah import summernote di app.js) --}}
+        @vite(['resources/js/app.js'])
+    @endpush
+
     @push('scripts')
-    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            ClassicEditor
-                .create(document.querySelector('#content'))
-                .catch(error => {
-                    console.error('CKEditor init error:', error);
-                });
+            $('#content').summernote({
+                height: 300,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
         });
     </script>
     @endpush

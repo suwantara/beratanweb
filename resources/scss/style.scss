@@ -441,3 +441,20 @@ $gray: #B0B9AE;
     margin: 0 auto;
 }
 
+/* Untuk 1 baris truncate */
+.text-truncate-1 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+/* Untuk 3 baris truncate */
+.text-truncate-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
