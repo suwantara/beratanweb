@@ -3,7 +3,7 @@
     <x-slot name="header">
         <div class="d-flex justify-content-between align-items-center">
             <h2 class="h4 mb-0 text-gray-800">Manage Categories</h2>
-            <a href="{{ route('admin.categories.create') }}" class="btn btn-primary">
+            <a href="{{ route('admin.categories.create') }}" class="btn btn-primary text-white">
                 <i class="bi bi-plus-lg"></i> Add New Category
             </a>
         </div>

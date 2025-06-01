@@ -7,11 +7,12 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CheckoutController;
 
-use App\View\Components\Section\Gallery;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+
 
 // Halaman utama dan publik
 Route::controller(PageController::class)->group(function () {
@@ -57,6 +58,12 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+// // routes/web.php
+// Route::get('/checkout/{product}', [CheckoutController::class, 'showForm']);
+// Route::post('/checkout/{product}', [CheckoutController::class, 'process']);
+// Route::post('/midtrans/callback', [CheckoutController::class, 'midtransCallback']); // untuk notifikasi Midtrans
 
 
 require __DIR__.'/auth.php';

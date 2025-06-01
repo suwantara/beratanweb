@@ -60,7 +60,7 @@
                             </div>
                             <div class="modal-footer border-top">
                                 @if(is_null($message->read_at))
-                                    <form action="{{ route('messages.markAsRead', $message->id) }}" method="POST" class="me-2">
+                                    <form action="{{ route('dashboard.messages.markAsRead', $message->id) }}" method="POST" class="me-2">
                                         @csrf
                                         @method('PATCH')
                                         <button type="submit" class="btn btn-success">
