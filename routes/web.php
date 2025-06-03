@@ -8,6 +8,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\Admin\PostController;
 
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
@@ -23,6 +24,9 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/dashboard', 'dashboard')->name('dashboard');
     Route::get('/detail', 'detail')->name('detail');
 });
+
+Route::get('/tentang/{slug}', [PageController::class, 'aboutDetail'])->name('components.section.detail');
+
 
 Route::get('/produk', [ProductController::class, 'index'])->name('product');
 Route::get('/galeri', [GalleryController::class, 'index'])->name('gallery');
@@ -60,6 +64,9 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('posts', PostController::class);
+});
 // // routes/web.php
 // Route::get('/checkout/{product}', [CheckoutController::class, 'showForm']);
 // Route::post('/checkout/{product}', [CheckoutController::class, 'process']);

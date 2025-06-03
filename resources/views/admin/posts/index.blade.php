@@ -33,10 +33,12 @@
                             @forelse($posts as $post)
                                 <tr>
                                     <td>
-                                        <img src="{{ Storage::url($post->image) }}"
-                                             alt="{{ $post->title }}"
-                                             class="img-thumbnail me-2"
-                                             style="width: 50px; height: 50px; object-fit: cover;">
+                                        <a href="{{ route('admin.posts.show', $post) }}">
+                                            <img src="{{ Storage::url($post->image) }}"
+                                                alt="{{ $post->title }}"
+                                                class="img-thumbnail me-2"
+                                                style="width: 50px; height: 50px; object-fit: cover;">
+                                        </a>
                                         {{ $post->title }}
                                     </td>
                                     <td>{{ $post->category->name }}</td>

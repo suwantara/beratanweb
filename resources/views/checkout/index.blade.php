@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <a href="{{ route('home') }}" class="btn btn-primary text-white">Return to Home</a>
+    <a href="{{ route('home') }}" class="btn btn-primary text-white">Kembali ke Beranda</a>
     <div class="justify-content-center text-center my-4">
         <h2>Detail Pesanan</h2>
     </div>
@@ -114,11 +114,8 @@
                     <button type="submit" class="btn btn-success">Konfirmasi Pesanan</button>
                 </form>
             </div>
-
-
         </div>
 
     </div>
-
 </div>
 @endsection

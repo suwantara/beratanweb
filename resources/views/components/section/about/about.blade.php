@@ -6,7 +6,12 @@
                 <div class="row g-2">
                     <div class="col-6 position-relative wow fadeIn" data-wow-delay="0.7s">
                         <div class="about-experience bg-secondary rounded">
-                            <h1 class="display-1 mb-0" data-toggle="counter-up">25</h1>
+                            @php
+                                $tahun = 2000;
+                                $tahun_sekarang = now()->year;
+                                $tahun_pengalaman = $tahun_sekarang - $tahun;
+                            @endphp
+                            <h1 class="display-1 mb-0" data-toggle="counter-up">{{ $tahun_pengalaman }}</h1>
                             <small class="fs-5 fw-bold">Tahun Pengalaman</small>
                         </div>
                     </div>
@@ -39,7 +44,10 @@
                         <span>Kami hanya menggunakan metode alami dalam pemeliharaan sapi dan pengolahan produk.</span>
                     </div>
                 </div>
-                <a class="btn btn-secondary rounded-pill py-3 px-5" href="">Lihat Lainnya</a>
+                <a class="btn btn-secondary rounded-pill py-3 px-5" href="{{ route('components.section.detail', ['slug' => 'sejarah']) }}">
+                    Lihat Selengkapnya
+                </a>
+
             </div>
         </div>
     </div>

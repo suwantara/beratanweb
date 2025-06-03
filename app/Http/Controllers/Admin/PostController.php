@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Interfaces\ImageManagerInterface;
 
 class PostController extends Controller
 {
@@ -24,70 +25,103 @@ class PostController extends Controller
         return view('admin.posts.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, ImageManagerInterface $imageManager)
     {
-        $validated = $request->validate([
+        $data = $request->validate([
             'title' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
             'excerpt' => 'required|string',
             'content' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=300,min_height=300',
         ]);
 
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('posts', 'public');
-            $validated['image'] = $path;
+            $data['image'] = $this->processImage($request->file('image'), $imageManager);
         }
 
-        $validated['user_id'] = Auth::id();
+        $data['user_id'] = Auth::id();
+        $data['slug'] = $this->generateUniqueSlug($data['title']);
 
-        // Generate a unique slug
-        $slug = Str::slug($validated['title']);
-        $count = Post::where('slug', 'like', "$slug%")->count();
-        $validated['slug'] = $count ? "{$slug}-{$count}" : $slug;
+        Post::create($data);
 
-        Post::create($validated);
-
-        return redirect()->route('admin.posts.index')
-            ->with('success', 'Post created successfully.');
+        return redirect()->route('admin.posts.index')->with('success', 'Post created successfully.');
     }
 
     public function edit(Post $post)
     {
-        $categories = Category::all(); // Fetch all categories for the dropdown
+        $categories = Category::all();
         return view('admin.posts.edit', compact('post', 'categories'));
     }
 
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Post $post, ImageManagerInterface $imageManager)
     {
-        $validated = $request->validate([
+        $data = $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'excerpt' => 'required|string',
             'category_id' => 'required|exists:categories,id',
+            'excerpt' => 'required|string',
+            'content' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
-            Storage::disk('public')->delete($post->image);
-            $path = $request->file('image')->store('posts', 'public');
-            $validated['image'] = $path;
+            if ($post->image) {
+                Storage::disk('public')->delete($post->image);
+            }
+            $data['image'] = $this->processImage($request->file('image'), $imageManager);
         }
 
-        $validated['user_id'] = Auth::id();
-        $validated['slug'] = Str::slug($validated['title']);
-        $post->update($validated);
+        $data['user_id'] = Auth::id();
+        $data['slug'] = $this->generateUniqueSlug($data['title'], $post->id);
 
-        return redirect()->route('admin.posts.index')
-            ->with('success', 'Post updated successfully');
+        $post->update($data);
+
+        return redirect()->route('admin.posts.index')->with('success', 'Post updated successfully.');
     }
 
     public function destroy(Post $post)
     {
-        Storage::disk('public')->delete($post->image);
+        if ($post->image) {
+            Storage::disk('public')->delete($post->image);
+        }
+
         $post->delete();
 
-        return redirect()->route('admin.posts.index')
-            ->with('success', 'Post deleted successfully');
+        return redirect()->route('admin.posts.index')->with('success', 'Post deleted successfully.');
+    }
+
+    public function show(Post $post)
+    {
+        return view('admin.posts.show', compact('post'));
+    }
+
+    // 🔧 Helpers
+
+    private function processImage($image, ImageManagerInterface $imageManager): string
+    {
+        $filename = uniqid('post_') . '.webp';
+        $path = 'posts/' . $filename;
+
+        $img = $imageManager->read($image)->toWebp(75);
+        Storage::disk('public')->put($path, (string) $img);
+
+        return $path;
+    }
+
+    private function generateUniqueSlug(string $title, ?int $ignoreId = null): string
+    {
+        $slug = Str::slug($title);
+        $original = $slug;
+
+        $count = 1;
+        while (
+            Post::where('slug', $slug)
+                ->when($ignoreId, fn($query) => $query->where('id', '!=', $ignoreId))
+                ->exists()
+        ) {
+            $slug = "{$original}-{$count}";
+            $count++;
+        }
+
+        return $slug;
     }
 }
