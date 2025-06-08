@@ -17,6 +17,7 @@
         "bootstrap": "^5.3.6",
         "jquery": "^3.7.1",
         "sass": "^1.87.0",
-        "summernote": "^0.9.1"
+        "summernote": "^0.9.1",
+        "sweetalert2": "^11.22.0"
     }
 }

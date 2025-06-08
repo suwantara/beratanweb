@@ -1,7 +1,9 @@
 {{-- filepath: d:\app\laragon\www\project-smt-2\dairyweb\resources\views\admin\products\show.blade.php --}}
-@extends('layouts.dashboard')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="h4 mb-0 text-gray-800">Detail Produk</h2>
+    </x-slot>
 
-@section('content')
 <div class="container">
     <h1>Detail Produk</h1>
     <div class="card">
@@ -16,4 +18,4 @@
     </div>
     <a href="{{ route('product') }}" class="btn btn-secondary mt-3">Kembali</a>
 </div>
-@endsection
+</x-app-layout>

@@ -1,6 +1,9 @@
-@extends('layouts.dashboard')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="h4 mb-0 text-gray-800">Tambah Produk</h2>
+    </x-slot>
 
-@section('content')
+
 <div class="container">
     <h1>Tambah Produk</h1>
     <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
@@ -31,4 +34,5 @@
         <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
 </div>
-@endsection
+
+</x-app-layout>

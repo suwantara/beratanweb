@@ -1,9 +1,14 @@
-@extends('layouts.dashboard')
+<x-app-layout>
+    <x-slot name="header">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="h4 mb-0 text-gray-800">Manage Products</h2>
+            <a href="{{ route('admin.products.create') }}" class="btn btn-primary text-white">
+                <i class="bi bi-plus-lg"></i> Add New Product
+            </a>
+        </div>
+    </x-slot>
 
-@section('content')
 <div class="container">
-    <h1>Daftar Produk</h1>
-    <a href="{{ route('admin.products.create') }}" class="btn btn-primary mb-3 text-white">Tambah Produk</a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -19,4 +24,4 @@
         @endforelse
     </div>
 </div>
-@endsection
+</x-app-layout>
